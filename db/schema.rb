@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180605065019) do
+ActiveRecord::Schema.define(version: 20180605205614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "table_user_authorization_tokens", force: :cascade do |t|
+    t.string "token", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_table_user_authorization_tokens_on_user_id", unique: true
+  end
 
   create_table "table_users", force: :cascade do |t|
     t.string "email", null: false
