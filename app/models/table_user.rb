@@ -2,10 +2,10 @@ class TableUser < ApplicationRecord
   validates :email, presence: true
 
 
-  # has_one :token,
-  # primary_key: :id,
-  # foreign_key: :user_id,
-  # class_name: 'UserAuthorizationToken'
+  has_one :token,
+  primary_key: :id,
+  foreign_key: :user_id,
+  class_name: 'TableUserAuthorizationToken'
 
 
 

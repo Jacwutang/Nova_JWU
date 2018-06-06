@@ -2,37 +2,27 @@ class TableUsersController < ApplicationController
   def create
     #Creating a user.
 
-    @user = User.new(params[:email])
+    @user = User.new(user_params)
 
     # If user successfully created,
     if @user.save
       #Generate a unique token and store in authorization table
 
-      token = UserAuthorizationToken.generate_auth_token
+      token_string = UserAuthorizationToken.generate_auth_token
 
-      @token = UserAuthorizationToken.new(token,@user.id)
+      @token = UserAuthorizationToken.new(token: token_string, user_id: @user.id)
 
       if @token.save
+        #send the token, email, and user id to the client.
+        render json: {@user.email, @user.id, token: token}
 
-      else
-
-
+        #client can then store the token in localStorage.
       end
-
-      #send the token to the client.
-
-
-      #Store token in browser or somewhere else.
-
-
-    else
-
-
     end
+
   end
 
   def show
-
   end
 
 
@@ -40,8 +30,8 @@ class TableUsersController < ApplicationController
   private
 
 
-  # def user_params
-  #   params.require(:user).permit(:email)
-  # end
+  def user_params
+    params.require(:user).permit(:email)
+  end
 
 end
