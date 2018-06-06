@@ -1,2 +1,0 @@
-class UserAuthorizationTokensController < ApplicationController
-end
