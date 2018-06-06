@@ -8,18 +8,13 @@ class TableUser < ApplicationRecord
   primary_key: :id,
   foreign_key: :user_id,
   class_name: 'TableUserAuthorizationToken'
-
-
-
+  
   #Find by email
   def self.find_by_credentials(email)
     user = TableUser.find_by_email(email)
     return nil if user.nil?
     return user
   end
-
-
-
 end
 ```
 
@@ -37,7 +32,6 @@ class TableUserAuthorizationToken < ApplicationRecord
   def self.generate_auth_token
     SecureRandom::urlsafe_base64(16)
   end
-
 end
 ```
 # Create a new User and new Token
@@ -88,11 +82,6 @@ class ApiController < ApplicationController
         flash[:error] = "You must be logged in to access this section"
       redirect_to "/login"
   end
-
-
-
-
-
 end
 ```
 
@@ -119,8 +108,6 @@ class ApplicationController < ActionController::Base
     session[:token] = @token_obj.token
     @current_user = user
   end
-
-
 end
 ```
 
