@@ -1,5 +1,6 @@
 
 # Create a new User and new Token
+
 ```
 class TableUsersController < ApplicationController
   def create
@@ -27,6 +28,6 @@ class TableUsersController < ApplicationController
     end
 
   end
- ```
+```
 
 
