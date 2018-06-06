@@ -1,7 +1,7 @@
 
 # Create a new User and new Token
 
-```
+```ruby
 class TableUsersController < ApplicationController
   def create
     #Creating a user.
