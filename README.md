@@ -98,6 +98,7 @@ end
 
 # Applications Controller
 ### 1) Use Session object to verify a user.
+### 2) Alternative, store a token in browser. (e.x. localStorage)
 ```ruby
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
