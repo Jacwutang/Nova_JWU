@@ -17,5 +17,9 @@ class TableUser < ApplicationRecord
     return user
   end
 
+  def self.reset_session_token!
+    
+  end
+
 
 end

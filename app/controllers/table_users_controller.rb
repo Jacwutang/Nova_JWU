@@ -14,18 +14,16 @@ class TableUsersController < ApplicationController
 
       if @token.save
         #send the token, email, and user id to the client.
+
+        login(@user)
+
         render json: {@user.email, @user.id, token: token}
 
-        #client can then store the token in localStorage.
+        #client can then store the token in localStorage or use rails session
       end
     end
 
   end
-
-  def show
-  end
-
-
 
   private
 
