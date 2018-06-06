@@ -1,4 +1,45 @@
+# User model validations and associations
+```ruby 
+class TableUser < ApplicationRecord
+  validates :email, presence: true
 
+
+  has_one :token,
+  primary_key: :id,
+  foreign_key: :user_id,
+  class_name: 'TableUserAuthorizationToken'
+
+
+
+  #Find by email
+  def self.find_by_credentials(email)
+    user = TableUser.find_by_email(email)
+    return nil if user.nil?
+    return user
+  end
+
+
+
+end
+```
+
+# Token model validations and associations
+```ruby
+class TableUserAuthorizationToken < ApplicationRecord
+  validates :token, :user_id, presence: true
+
+
+  belongs_to :user,
+  primary_key: :id,
+  foreign_key: :user_id,
+  class_name: 'TableUser'
+
+  def self.generate_auth_token
+    SecureRandom::urlsafe_base64(16)
+  end
+
+end
+```
 # Create a new User and new Token
 
 ```ruby
@@ -29,5 +70,7 @@ class TableUsersController < ApplicationController
 
   end
 ```
+
+
 
 
