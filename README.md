@@ -1,24 +1,32 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Create a new User and new Token
+```
+class TableUsersController < ApplicationController
+  def create
+    #Creating a user.
 
-Things you may want to cover:
+    @user = User.new(user_params)
 
-* Ruby version
+    # If user successfully created,
+    if @user.save
+      #Generate a unique token and store in authorization table
 
-* System dependencies
+      token_string = UserAuthorizationToken.generate_auth_token
 
-* Configuration
+      @token = UserAuthorizationToken.new(token: token_string, user_id: @user.id)
 
-* Database creation
+      if @token.save
+        #send the token, email, and user id to the client.
 
-* Database initialization
+        login(@user)
 
-* How to run the test suite
+        render json: {@user.email, @user.id, token: token}
 
-* Services (job queues, cache servers, search engines, etc.)
+        #client can then store the token in localStorage or use rails session
+      end
+    end
 
-* Deployment instructions
+  end
+ ```
 
-* ...
+
