@@ -73,6 +73,9 @@ class TableUsersController < ApplicationController
 
 # Api controller
 
+### 1) before any other methods, require that a user is logged in.
+### 2) If logged in, proceed with controller actions (unfinished)
+
 ```ruby
 class ApiController < ApplicationController
   #before accessing other  API controller methods, require login
